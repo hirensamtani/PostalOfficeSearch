@@ -36,13 +36,17 @@ class SearchDetailsViewController : UIViewController, UITableViewDelegate, UITab
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-       
+        
+        //        print("pOfficeData cnt", postOffice.count)
         
         onLoadNew(loadNew)
         tableView.reloadData()
         
         
     }
+    
+    
+    
     
     
     override func viewDidLoad() {
@@ -54,14 +58,14 @@ class SearchDetailsViewController : UIViewController, UITableViewDelegate, UITab
         stack = delegate.stack
         
         //        postOffice = fetchPostOffice();
-       
+        
         onLoadNew(loadNew)
         
         
         tableView.delegate = self
         tableView.dataSource = self
         hideActivityIndicator(activityIndicator)
-      
+        
         
         
     }
@@ -171,19 +175,6 @@ class SearchDetailsViewController : UIViewController, UITableViewDelegate, UITab
         }
         
         
-       
-        
-        //        pOfficeData?.remove(at: indexPath.row)
-        
-        //        tableView.deleteRows(at: [indexPath], with: .automatic)
-        
-        //        tableView.reloadRows(at: [indexPath], with: .automatic)
-        
-        //        if indexPath.row==((pOfficeData?.count)!-1){
-        //         self.tableView.reloadData()
-        //        }
-        //
-        //         self.tableView.cellForRow(at: indexPath)?.setSelected(true, animated: true)
         return swipeActions
     }
     
@@ -192,7 +183,7 @@ class SearchDetailsViewController : UIViewController, UITableViewDelegate, UITab
     func fetchPostOffice() -> [PostOffice] {
         var postOffice = [PostOffice]()
         let fr: NSFetchRequest<NSFetchRequestResult> = PostOffice.fetchRequest()
-        print("in fetch results")
+        //        print("in fetch results")
         do {
             
             let results = try stack.viewContext.fetch(fr) as! [PostOffice]
@@ -209,19 +200,19 @@ class SearchDetailsViewController : UIViewController, UITableViewDelegate, UITab
     func addPostOffice(_ ind : Int) {
         
         let postOfficeArrStub = pOfficeData![ind]
-        print("add called")
+        //        print("add called")
         
         
         
         if !postOfficeExists(pincode: postOfficeArrStub.pincode,name: postOfficeArrStub.name){
             
-//            let postOfficeObjStub: PostOffice = PostOffice(postOfficeArrStub,stack.viewContext)
             
-//            print("Post Office object created:\n\(postOfficeObjStub.name)")
+            let pOffice: PostOffice = PostOffice(postOfficeArrStub,stack.viewContext)
             
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            
             appDelegate.saveViewContext()
-            print("stack saved")
+            print("stack saved", postOffice.count)
             showInfo(withTitle: "", withMessage: "Post Office Saved To Favourites", action: tableView.reloadData)
         }
         else {
@@ -229,7 +220,7 @@ class SearchDetailsViewController : UIViewController, UITableViewDelegate, UITab
         }
         
         
-      
+        
     }
     
     func removePostOffice(_ ind : Int) {
@@ -237,9 +228,9 @@ class SearchDetailsViewController : UIViewController, UITableViewDelegate, UITab
         let postOfficeObjStub = postOffice[ind]
         
         do{
-//            print(postOfficeObjStub.name)
+            //            print(postOfficeObjStub.name)
             stack.viewContext.delete(postOfficeObjStub)
-            print("Delete called")
+            //            print("Delete called")
             try stack.viewContext.save()
             pOfficeData?.remove(at: ind)
             tableView.reloadData()
@@ -247,6 +238,7 @@ class SearchDetailsViewController : UIViewController, UITableViewDelegate, UITab
         } catch {
             let nserror = error as NSError
             assertionFailure()
+            showInfo(withTitle: "Error", withMessage: "Unable to delete post office", action: nil)
             print("Unresolved error \(nserror), \(nserror.userInfo)")
         }
         
@@ -254,8 +246,10 @@ class SearchDetailsViewController : UIViewController, UITableViewDelegate, UITab
     }
     
     func postOfficeExists(pincode : String, name : String) -> Bool{
+        postOffice = fetchPostOffice()
         
         for stub in postOffice {
+            print(stub.name)
             if stub.pincode == pincode && stub.name == name {
                 return true
             }

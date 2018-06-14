@@ -8,16 +8,19 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController, UITextFieldDelegate {
     
     
     
     @IBOutlet weak var pincode: UITextField!
     
     
+    @IBOutlet weak var scrollview: UIScrollView!
+    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     
+    @IBOutlet weak var btnSearch: UIButton!
     
     
     var pOfficeData : [pOffice] = [pOffice] ()
@@ -25,10 +28,39 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         hideActivityIndicator(activityIndicator)
+        pincode.delegate = self
     }
     
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        scrollview.setContentOffset(btnSearch.frame.origin, animated: true)
+    }
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        pincode.resignFirstResponder()
+        
+        
+        if (textField == pincode) {
+            btnSearch.sendActions(for: UIControlEvents.touchUpInside)
+            scrollview.setContentOffset(btnSearch.frame.origin, animated: true)
+        }
+        
+        return true
+    }
+    
+    
+    
+    
+    
     @IBAction func Search(_ sender: Any) {
+        if pincode.text?.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines) == "" {
+            print("Empty")
+            return
+        }
+        
+        
         showActivityIndicator(activityIndicator)
         
         PostalPincodeClient.sharedInstance.getPostalLocation(PostalPincodeClient.infoType.pincode, pincode.text!, completionHandlerForPostalLocation:{ (postOfficeInfo, infofound ,error) in
@@ -36,8 +68,9 @@ class SearchViewController: UIViewController {
             
             DispatchQueue.main.sync {
                 
+                
                 guard (error == nil) else {
-                    self.showInfo(withTitle: "Error", withMessage: (error?.description)!, action: nil)
+                    self.showInfo(withTitle: "Error", withMessage: (error?.userInfo[NSLocalizedDescriptionKey])! as! String, action: nil)
                     self.hideActivityIndicator(self.activityIndicator)
                     return
                 }
@@ -55,7 +88,7 @@ class SearchViewController: UIViewController {
                         continue
                     }
                     
-                   
+                    
                     self.pOfficeData.append(pOfficeStub)
                 }
                 

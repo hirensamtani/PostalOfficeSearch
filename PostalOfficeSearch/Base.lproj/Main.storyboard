@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -151,43 +150,61 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="RxZ-8P-rK5">
-                                <rect key="frame" x="20" y="345.66666666666669" width="335" height="136"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="NDZ-lk-EGA">
+                                <rect key="frame" x="178" y="384" width="20" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="G77-Bv-BZa"/>
+                                </constraints>
+                            </activityIndicatorView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AFI-nB-dDN">
+                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pincode" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="suj-j2-j1O" userLabel="Pincode">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="RxZ-8P-rK5">
+                                        <rect key="frame" x="35" y="269" width="305" height="103"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pincode" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="suj-j2-j1O" userLabel="Pincode">
+                                                <rect key="frame" x="0.0" y="0.0" width="305" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="cex-0f-0fF"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WTq-sn-RBa" userLabel="Search">
+                                                <rect key="frame" x="0.0" y="63" width="305" height="40"/>
+                                                <color key="backgroundColor" red="0.56607641171942391" green="0.69118928444021555" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Search">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="Search:" destination="BYZ-38-t0r" eventType="touchUpInside" id="I9R-4c-cvg"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="cex-0f-0fF"/>
+                                            <constraint firstItem="WTq-sn-RBa" firstAttribute="width" secondItem="suj-j2-j1O" secondAttribute="width" id="jCd-fw-D3e"/>
+                                            <constraint firstItem="WTq-sn-RBa" firstAttribute="height" secondItem="suj-j2-j1O" secondAttribute="height" id="s4l-zi-ZM7"/>
                                         </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES" textContentType="postal-code"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WTq-sn-RBa" userLabel="Search">
-                                        <rect key="frame" x="0.0" y="48" width="335" height="30"/>
-                                        <color key="backgroundColor" red="0.56607641171942391" green="0.69118928444021555" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Search">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="Search:" destination="BYZ-38-t0r" eventType="touchUpInside" id="I9R-4c-cvg"/>
-                                        </connections>
-                                    </button>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="NDZ-lk-EGA">
-                                        <rect key="frame" x="0.0" y="86" width="335" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="G77-Bv-BZa"/>
-                                        </constraints>
-                                    </activityIndicatorView>
+                                    </stackView>
                                 </subviews>
-                            </stackView>
+                                <constraints>
+                                    <constraint firstItem="RxZ-8P-rK5" firstAttribute="centerX" secondItem="AFI-nB-dDN" secondAttribute="centerX" id="1jj-tR-QYx"/>
+                                    <constraint firstAttribute="bottom" secondItem="RxZ-8P-rK5" secondAttribute="bottom" id="KtS-fT-rXb"/>
+                                    <constraint firstAttribute="trailing" secondItem="RxZ-8P-rK5" secondAttribute="trailing" constant="35" id="VtD-Z6-kel"/>
+                                    <constraint firstItem="RxZ-8P-rK5" firstAttribute="centerY" secondItem="AFI-nB-dDN" secondAttribute="centerY" id="nSq-Y0-c6N"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="RxZ-8P-rK5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="8xU-tt-jR2"/>
-                            <constraint firstItem="WTq-sn-RBa" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="K5g-UC-PiH"/>
-                            <constraint firstItem="WTq-sn-RBa" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="OdK-Ph-BTL"/>
-                            <constraint firstItem="RxZ-8P-rK5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-20" id="SAs-r2-tEt"/>
+                            <constraint firstItem="AFI-nB-dDN" firstAttribute="centerX" secondItem="NDZ-lk-EGA" secondAttribute="centerX" id="QYy-Aa-2Ie"/>
+                            <constraint firstItem="AFI-nB-dDN" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="R3j-U8-IeH"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="AFI-nB-dDN" secondAttribute="bottom" id="Xnk-5B-X7U"/>
+                            <constraint firstItem="AFI-nB-dDN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Zk7-dS-UVh"/>
+                            <constraint firstItem="NDZ-lk-EGA" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="vh7-wM-7qP"/>
+                            <constraint firstItem="RxZ-8P-rK5" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" constant="-70" id="y3z-XH-6La"/>
+                            <constraint firstItem="NDZ-lk-EGA" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="ykb-V5-ucg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -195,7 +212,9 @@
                     <navigationItem key="navigationItem" id="NWD-cj-zci"/>
                     <connections>
                         <outlet property="activityIndicator" destination="NDZ-lk-EGA" id="kFZ-lO-VEe"/>
+                        <outlet property="btnSearch" destination="WTq-sn-RBa" id="foq-Rk-502"/>
                         <outlet property="pincode" destination="suj-j2-j1O" id="oHj-kf-2zI"/>
+                        <outlet property="scrollview" destination="AFI-nB-dDN" id="TqV-wd-LKu"/>
                         <segue destination="4hG-zg-nlb" kind="presentation" identifier="showdetails" id="zeQ-NO-rxG"/>
                     </connections>
                 </viewController>

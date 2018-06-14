@@ -49,7 +49,8 @@ extension PostalPincodeClient {
             
             
             guard let resultPostOfficeInfo = result![ParseResults.PostOffice] as? [[String:AnyObject]] else {
-                let userInfo = [NSLocalizedDescriptionKey : "Coulnd't find PostOffice key in '\(result!)"]
+                //                let userInfo = [NSLocalizedDescriptionKey : "Coulnd't find PostOffice key in '\(result!)"]
+                let userInfo = [NSLocalizedDescriptionKey : "Post Office Not Found"]
                 completionHandlerForPostalLocation(nil, false, NSError(domain: "getStudentLocationFromParse", code: 1, userInfo: userInfo))
                 return
             }

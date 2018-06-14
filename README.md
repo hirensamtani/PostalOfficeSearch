@@ -29,3 +29,6 @@ There is a scope to add more features such as:-
 * Search by city name
 * Show more details
 * Show the chosen post office on maps
+
+## Sample Indian Pincodes
+395007, 401107
