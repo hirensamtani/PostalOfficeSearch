@@ -37,6 +37,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         pincode.resignFirstResponder()
@@ -44,7 +45,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         
         if (textField == pincode) {
             btnSearch.sendActions(for: UIControlEvents.touchUpInside)
-            scrollview.setContentOffset(btnSearch.frame.origin, animated: true)
+            scrollview.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            
         }
         
         return true
@@ -55,6 +57,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func Search(_ sender: Any) {
+        
+        
+        
+        pincode.resignFirstResponder()
+        scrollview.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
         if pincode.text?.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines) == "" {
             print("Empty")
             return

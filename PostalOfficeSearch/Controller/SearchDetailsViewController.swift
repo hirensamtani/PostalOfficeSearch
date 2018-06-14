@@ -154,6 +154,7 @@ class SearchDetailsViewController : UIViewController, UITableViewDelegate, UITab
         
         if(destructive) {
             let contextItem = UIContextualAction(style: .destructive, title: "Delete") { (contextualAction, view, boolValue) in
+                action
                 self.removePostOffice(indexPath.row)
                 print("Trailing Action style .destructive")
             }
@@ -165,10 +166,12 @@ class SearchDetailsViewController : UIViewController, UITableViewDelegate, UITab
         else {
             let contextItem = UIContextualAction(style: .normal, title: "Save") { (contextualAction, view, boolValue) in
                 action
+                self.addPostOffice(indexPath.row)
                 print("Leading Action style .normal")
             }
             
-            self.addPostOffice(indexPath.row)
+//            swipeActions.performsFirstActionWithFullSwipe = true
+            
             swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
             swipeActions.performsFirstActionWithFullSwipe = true
             
